@@ -6,3 +6,6 @@ migrations
 tests
 create_datas.ipynb
 test_import.py
+dump.rdb
+datas/recom-films.db
+app/reco.py
