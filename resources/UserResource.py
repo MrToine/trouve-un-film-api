@@ -56,7 +56,16 @@ class UserResource(Resource):
                         'name': genre.name
                         } for genre in like.movie.genres]
                     } for like in user.likes],
-                'role': user.role
+                'role': user.role,
+                'posts': [{
+                    'id': post.id,
+                    'title': post.title,
+                    'content': post.content,
+                    'created_at': post.created_at.isoformat(),
+                    'updated_at': post.updated_at.isoformat(),
+                    'user_id': post.user_id,
+                    'type': post.type
+                } for post in sorted(user.posts, key=lambda post: post.id, reverse=True)]
             }
         users = User.query.all()
         return [{

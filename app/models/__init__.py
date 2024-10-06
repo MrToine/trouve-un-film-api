@@ -1,4 +1,5 @@
 from .User import User
+from .Profile import Profile
 from .Like import Like
 from .Movie import Movie
 from .Genre import Genre

@@ -5,6 +5,7 @@ from flask_restful import Resource
 from flask_jwt_extended import jwt_required, get_jwt_identity
 from app.models import Post, User
 from app.database import db
+from datetime import datetime
 
 def admin_required(fn):
     @wraps(fn)
@@ -73,14 +74,17 @@ class PostResource(Resource):
         }, 200
     
     @jwt_required()
-    def post(self):
+    def post(self, user_id=None):
+        print("POST d'un post")
         user_id = get_jwt_identity()
-        post = Post(
-            title='Info Message',
-            content='',
-            user_id=1,
-            type='info'
-        )
+        post = {
+            'title': 'post-' + str(user_id),
+            'content': request.json.get('content', ''),
+            'user_id': user_id,
+            'type': request.json.get('type', 'post'),
+            'active': True
+        }
+        post = Post(**post)
         post.save()
         return {
             'id': post.id,
@@ -93,7 +97,6 @@ class PostResource(Resource):
         }, 201
 
     @jwt_required()
-    @admin_required
     def patch(self):
         type = request.args.get('type')
         if type != 'info':

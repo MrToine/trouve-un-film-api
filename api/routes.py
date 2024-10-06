@@ -52,11 +52,11 @@ api.add_resource(RealisatorCountResource, '/participants/realisators/count')
 api.add_resource(ActorResource, '/participants/actors', '/participants/actors/<int:actor_id>')
 api.add_resource(ActorCountResource, '/participants/actors/count')
 
-api.add_resource(PostResource, '/posts', '/posts/<int:post_id>')
+api.add_resource(PostResource, '/posts', '/posts/<int:user_id>')
 
 api.add_resource(UserResource, '/users', '/users/<int:user_id>')
 api.add_resource(AuthResource, '/users/login')
-api.add_resource(UserProfileResource, '/users/profile', '/users/profile/<int:user_id>')
+api.add_resource(UserProfileResource, '/users/profile', '/users/profile/<int:user_id>', methods=['GET', 'PATCH'])
 
 api.add_resource(LikeResource, '/likes', '/likes/<int:user_id>')
 

@@ -12,6 +12,8 @@ class Post(db.Model):
     type = db.Column(db.String(50), nullable=False)
     active = db.Column(db.Boolean, default=True)
 
+    user = db.relationship('User', back_populates='posts')
+
     def save(self):
         if not self.id:
             db.session.add(self)

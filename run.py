@@ -1,7 +1,7 @@
 from app import create_app
 from app.database import db
 from flask_migrate import Migrate
-from app.models import Participant, User, Movie, Genre, Like, Post
+from app.models import Participant, User, Movie, Genre, Like, Post, Profile
 from app.models.relations import MovieGenre, MovieParticipant
 from app.reco import load_data  # Assurez-vous que c'est le bon chemin
 
@@ -13,13 +13,14 @@ def make_shell_context():
     return {
         'db': db, 
         'User': User, 
+        'Profile': Profile,
         'Like': Like,
         'Movie': Movie,
         'Genre': Genre,
         'Participant': Participant,
         'MovieGenre': MovieGenre,
         'MovieParticipant': MovieParticipant,
-	'Post': Post
+    	'Post': Post
     }
 
 def print_progress(progress, message):
